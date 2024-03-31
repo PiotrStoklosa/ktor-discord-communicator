@@ -11,10 +11,16 @@ group = "com.example"
 version = "0.0.1"
 
 application {
-    mainClass.set("com.example.ApplicationKt")
+    mainClass.set("ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("fat.jar")
+    }
 }
 
 repositories {
@@ -22,9 +28,13 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("io.ktor:ktor-client-core:2.3.9")
+    implementation("io.ktor:ktor-client-cio:2.3.9")
+    implementation("io.ktor:ktor-client-json:2.3.9")
+    implementation("io.ktor:ktor-client-json-jvm:2.3.9")
+    implementation("io.ktor:ktor-utils:2.3.9")
+    implementation("net.dv8tion:JDA:5.0.0-beta.21")
+
 }
